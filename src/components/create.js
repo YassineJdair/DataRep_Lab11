@@ -48,8 +48,14 @@ export class Create extends React.Component {
         e.preventDefault();
         alert("Movie: " + this.state.Title + " " +
               "Year :" + this.state.Year + " " +
-              "Poster: " + this.state.Poster
-            );
+              "Poster: " + this.state.Poster);
+
+            this.setState({
+                Title: '',
+                Year: '',
+                Poster: ''
+
+            })
     }
     
     //turns website code into the interactive pages users see
