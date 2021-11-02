@@ -5,7 +5,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 
-
+//
 app.use(cors());
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -25,9 +25,10 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
 })
 
+//route point
 app.get('/api/movies', (req, res) => {
 
-
+    //constant that contains movie information
     const mymovies = [
         {
             "Title": "Avengers: Infinity War",
@@ -58,15 +59,18 @@ app.get('/api/movies', (req, res) => {
             "Poster": "https://m.media-amazon.com/images/M/MV5BNDUyODAzNDI1Nl5BMl5BanBnXkFtZTcwMDA2NDAzMw@@._V1_SX300.jpg"
         }
     ];
-
+    
+    //sending json, message and a status code
     res.status(200).json({
         message: "Everything is Ok",
         movies: mymovies
     });
 })
 
+//listen for post request
 app.post('/api/movies', (req, res) => {
 
+    //log console
     console.log('Movie Recieved!');
     console.log(req.body.title);
     console.log(req.body.year);
