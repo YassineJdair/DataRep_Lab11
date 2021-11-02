@@ -13,7 +13,7 @@ export class Read extends React.Component {
     //component life cycle method //gets called when component is active
     componentDidMount() {
         //axios is promise based http client
-        axios.get('https://jsonblob.com/api/jsonblob/894944504570986496')
+        axios.get('http://localhost:4000/api/movies')
             //fullfilled state
             .then((response) => {
                 this.setState({ movies: response.data.movies })

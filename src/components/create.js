@@ -1,17 +1,18 @@
 //combines two operations
 import React from 'react';
+import axios from 'axios';
 
 export class Create extends React.Component {
 
     constructor() {
         super();
-        
+
         //provides the scripts data to be executed whenever the submit event is occurred
         this.onSubmit = this.onSubmit.bind(this);
         this.onChangeTitle = this.onChangeTitle.bind(this);
         this.onChangeYear = this.onChangeYear.bind(this);
         this.onChangePoster = this.onChangePoster.bind(this);
-        
+
         // used by React to represent information about the components current situation
         this.state = {
             Title: '',
@@ -19,7 +20,7 @@ export class Create extends React.Component {
             Poster: ''
         }
     }
-    
+
     //onchange attributes fires the moment the value of the element is changed
     onChangeTitle(e) {
         //setState updates value of state based on new user input()
@@ -47,17 +48,33 @@ export class Create extends React.Component {
     onSubmit(e) {
         e.preventDefault();
         alert("Movie: " + this.state.Title + " " +
-              "Year :" + this.state.Year + " " +
-              "Poster: " + this.state.Poster);
+            "Year :" + this.state.Year + " " +
+            "Poster: " + this.state.Poster);
 
-            this.setState({
-                Title: '',
-                Year: '',
-                Poster: ''
+        const newMovie = {
+            title: this.state.Title,
+            year: this.state.Year,
+            poster: this.state.Poster
+        }
 
+        axios.post('http://localhost:4000/api/movies', newMovie)
+
+            .then((res) => {
+                console.log(res);
             })
+
+            .catch((err) => {
+                console.log(err);
+            });
+
+    //      this.setState({
+    //          Title: '',
+    //          Year: '',
+    //          Poster: ''
+
+    //    }) 
     }
-    
+
     //turns website code into the interactive pages users see
     render() {
         //returns some text
@@ -67,7 +84,7 @@ export class Create extends React.Component {
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
                         <label>Add Movie Title:</label>
-                        //input maintains its own state and gets updated based on user input can only be updated by using setState()
+                        {/*input maintains its own state and gets updated based on user input can only be updated by using setState() */}
                         <input type='text'
                             className='form-control'
                             value={this.state.Title}
@@ -77,7 +94,7 @@ export class Create extends React.Component {
                     </div>
                     <div className="form,-group">
                         <label>Add Movie Year:</label>
-                        //input maintains its own state and gets updated based on user input can only be updated by using setState()
+                        {/*input maintains its own state and gets updated based on user input can only be updated by using setState() */}
                         <input type='text'
                             className='form-control'
                             value={this.state.Year}
@@ -88,15 +105,15 @@ export class Create extends React.Component {
                     <div className="form-group">
                         <label>Add Movie Poster:</label>
                         <textarea type='text'
-                        className='form-control'
-                        value={this.state.Poster}
-                        //onchange attributes fires the moment the value of the element is changed
-                        onChange={this.onChangePoster}>
+                            className='form-control'
+                            value={this.state.Poster}
+                            //onchange attributes fires the moment the value of the element is changed
+                            onChange={this.onChangePoster}>
                         </textarea>
                     </div>
 
                     <div className="form-group">
-                        //input maintains its own state and gets updated based on user input can only be updated by using setState()
+                        {/*input maintains its own state and gets updated based on user input can only be updated by using setState() */}
                         <input type='submit'
                             value='Add Movie'
                             className='btn btn-primary'></input>
