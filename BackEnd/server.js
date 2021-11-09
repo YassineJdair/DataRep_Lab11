@@ -28,6 +28,7 @@ const myConnectionString = 'mongodb+srv://admin:Yassine12@cluster0.bagqx.mongodb
 //connectin with mongoose
 mongoose.connect(myConnectionString);
 
+//create a new database schema
 const Schema = mongoose.Schema;
 
 //generated schema
@@ -39,6 +40,7 @@ var movieSchema = new Schema({
 
 });
 
+//use the schema to create a new "movie" database model.
 var MovieModel = mongoose.model("Movie", movieSchema);
 
 app.get('/', (req, res) => {
