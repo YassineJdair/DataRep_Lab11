@@ -94,6 +94,16 @@ app.get('/api/movies', (req, res) => {
     // });
 })
 
+//listens for put request to edit movies
+app.put('/api/movies/:id', (req, res)=>{
+    console.log('Updating: '+req.params.id)
+ 
+    MovieModel.findByIdAndUpdate(req.params.id, req.body, {new:true},
+        (err, data)=>{
+            res.send(data);
+        })
+})
+
 //listen for get request
 app.get('/api/movies/:id', (req,res) => {
     //function passes id
@@ -103,8 +113,6 @@ app.get('/api/movies/:id', (req,res) => {
     MovieModel.findById(req.params.id, (err, data) =>{
         //send data back
         res.json(data);
-
-    
     })
 })
 
