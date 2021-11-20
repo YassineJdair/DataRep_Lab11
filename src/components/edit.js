@@ -21,7 +21,9 @@ export class Edit extends React.Component {
         }
     }
 
+    //lifecycle hook gets fired when componenet is active
     componentDidMount(){
+        //logs id to console
         console.log(this.props.match.params.id)
         axios.get('http://localhost:4000/api/movies/' + this.props.match.params.id)
         .then((res)=>{
