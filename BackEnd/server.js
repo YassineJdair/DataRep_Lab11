@@ -98,6 +98,7 @@ app.get('/api/movies', (req, res) => {
 app.put('/api/movies/:id', (req, res)=>{
     console.log('Updating: '+req.params.id)
  
+    //interact with database find and update field
     MovieModel.findByIdAndUpdate(req.params.id, req.body, {new:true},
         (err, data)=>{
             res.send(data);
