@@ -105,12 +105,21 @@ app.put('/api/movies/:id', (req, res)=>{
         })
 })
 
+//method to delete data// listens for http delete method
+app.delete('/api/movies/:id', (req, res) =>{
+    console.log("Delete Movie: " + req.params.id);
+
+    MovieModel.findByIdAndDelete(req.params.id,(err, data) =>{
+        res.send(data);
+        })
+})
+
 //listen for get request
 app.get('/api/movies/:id', (req,res) => {
     //function passes id
     console.log(req.params.id);
 
-    //use id tp find in database
+    //use id to find in database
     MovieModel.findById(req.params.id, (err, data) =>{
         //send data back
         res.json(data);

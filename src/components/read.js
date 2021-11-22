@@ -5,11 +5,17 @@ import axios from 'axios';
 
 export class Read extends React.Component {
 
+    //gets called for delete event
+    constructor(){
+        super();
+
+        this.ReloadData = this.ReloadData.bind(this);
+    }
+
     //store data to be used in class
     state = {
         movies: []
     };
-
     //component life cycle method //gets called when component is active
     componentDidMount() {
         //axios is promise based http client
@@ -23,6 +29,19 @@ export class Read extends React.Component {
                 });
     }
 
+    //gathers movies in database
+    ReloadData(){
+                //axios is promise based http client
+                axios.get('http://localhost:4000/api/movies')
+                //fullfilled state
+                .then((response) => {
+                    this.setState({ movies: response.data})
+                })
+                .catch((error) => {
+                        console.log(error)
+                    });
+    }
+
     render() {
         //returns some text
         return (
@@ -30,7 +49,7 @@ export class Read extends React.Component {
             <div>
                 <h3>Movies Showing</h3>
                 {/* jsx */}
-                <Movies movies={this.state.movies}></Movies>
+                <Movies movies={this.state.movies} ReloadData = {this.ReloadData} ></Movies>
             </div>
         );
     }
